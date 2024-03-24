@@ -1,0 +1,235 @@
+/* Fonts */
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../assets/fonts/PublicSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Public Sans light';
+    src: url('../../assets/fonts/PublicSans-Light.ttf') format('truetype');
+}
+
+/* General styling */
+.username-input,
+.password-input {
+    font-family: 'Public Sans', sans-serif;
+}
+
+.signup-container {
+    position: relative;
+    background: linear-gradient(#8D76EB, #F1F0F3);
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    z-index: 1;
+}
+.signupDetails-container {
+    position: relative;
+    background: linear-gradient(#8D76EB, #F1F0F3);
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    z-index: 1;
+}
+
+.star-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 15px;
+    height: 15px;
+}
+
+.ErrorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.boy-image {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    z-index: -1;
+    width: auto;
+    height: 450px;
+    pointer-events: none;
+}
+
+.girl-image {
+    position: absolute;
+    bottom: 0;
+    left: 350px;
+    z-index: -1;
+    width: auto;
+    height: 700px;
+    pointer-events: none;
+}
+
+.heading-girl {
+    color: #F1F0F3;
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 36px;
+    line-height: 1.5;
+    z-index: -1;
+}
+
+.signupCard {
+    padding: 48px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    margin-right: 100px;
+}
+
+
+.signupCard h1 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.signupDetailsCard {
+    padding: 48px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    margin-right: 100px;
+}
+
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    outline: none;
+    opacity: 1;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #7B62E4 !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #1A1350 !important;
+}
+
+/* Remember Me checkbox */
+.form-group.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.form-group.checkbox-group label {
+    font-size: 16px;
+    color: #333333;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.form-group.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+}
+
+/* Responsive styling */
+@media only screen and (max-width: 890px) {
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        outline: none;
+        opacity: 0.4;
+    }
+
+    .heading {
+        font-size: 23px;
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+    .signupCard {
+        background: rgba(255, 255, 255, 0.5);
+        margin-top: 20px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .ErrorMessage {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .signupDetailsCard {
+        background: rgba(255, 255, 255, 0.5);
+        margin-top: 20px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .boy-image {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 200px;
+        height: auto;
+        pointer-events: none;
+    }
+
+    .girl-image {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 200px;
+        height: auto;
+        pointer-events: none;
+    }
+}

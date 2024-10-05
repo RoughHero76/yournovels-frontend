@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { MdDashboard, MdEqualizer, MdPeople, MdViewModule, MdShoppingBasket, MdReceipt, MdSettings, MdHelp } from 'react-icons/md';
+import { MdDashboard, MdMenuBook, MdMode, MdPerson, MdSettings, MdHelp } from 'react-icons/md';
 import Sidebar from './sidebar/Sidebar';
 import SidebarItem, { SidebarContext } from './sidebar/SidebarItem';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import NavBar from './navBar/Navbar'
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,27 +26,29 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-
   return (
-    <div className="flex">
-      <SidebarContext.Provider value={{ expanded, setExpanded }}>
+    <SidebarContext.Provider value={{ expanded, setExpanded }}>
+      
+      <div className="flex">
         <Sidebar>
           <SidebarItem icon={<MdDashboard size={20} />} text="Dashboard" alert />
-          <SidebarItem icon={<MdEqualizer size={20} />} text="Statistics" active />
-          <SidebarItem icon={<MdPeople size={20} />} text="Users" />
-          <SidebarItem icon={<MdViewModule size={20} />} text="Inventory" />
-          <SidebarItem icon={<MdShoppingBasket size={20} />} text="Orders" alert />
-          <SidebarItem icon={<MdReceipt size={20} />} text="Billings" />
+          <SidebarItem icon={<MdMenuBook size={20} />} text="Read" active />
+          <SidebarItem icon={<MdMode size={20} />} text="Write" />
+          <SidebarItem icon={<MdPerson size={20} />} text="Profile" />
           <hr className="my-3" />
           <SidebarItem icon={<MdSettings size={20} />} text="Settings" />
           <SidebarItem icon={<MdHelp size={20} />} text="Help" />
         </Sidebar>
-      </SidebarContext.Provider>
-      <main className="App flex-1 p-4">
-        <h1> Hello, {userData?.username} </h1>
-      </main>
-    </div>
+        
+
+        <main className="App flex-1">
+        <NavBar userData={userData} />
+          <h1> Hello, {userData?.username} </h1>
+        </main>
+      </div>
+    </SidebarContext.Provider>
   );
 };
 
 export default Dashboard;
+

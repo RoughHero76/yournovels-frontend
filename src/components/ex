@@ -1,0 +1,235 @@
+// App.js
+import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import MainContent from './components/MainContent';
+import ProfileSidebar from './components/ProfileSidebar';
+
+const App = () => {
+ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+ const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
+
+ const toggleSidebar = () => {
+   setIsSidebarOpen(!isSidebarOpen);
+ };
+
+ const toggleProfileSidebar = () => {
+   setIsProfileSidebarOpen(!isProfileSidebarOpen);
+ };
+
+ return (
+   <div className="flex">
+     <Navbar
+       toggleSidebar={toggleSidebar}
+       toggleProfileSidebar={toggleProfileSidebar}
+     />
+     <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+     <MainContent />
+     <ProfileSidebar
+       isOpen={isProfileSidebarOpen}
+       toggleProfileSidebar={toggleProfileSidebar}
+     />
+   </div>
+ );
+};
+
+export default App;
+
+// Navbar.js
+import React from 'react';
+import { BiMenuAltRight, BiSearch, BiUserCircle } from 'react-icons/bi';
+
+const Navbar = ({ toggleSidebar, toggleProfileSidebar }) => {
+ const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+ const toggleSearch = () => {
+   setIsSearchOpen(!isSearchOpen);
+ };
+
+ return (
+   <nav className="fixed top-0 left-0 right-0 bg-white shadow-md py-2 px-4 flex items-center justify-between z-10">
+     <div className="flex items-center">
+       <button
+         className="mr-2 md:hidden"
+         onClick={toggleSidebar}
+       >
+         <BiMenuAltRight className="text-gray-600 text-2xl" />
+       </button>
+       <div className="flex items-center">
+         <img
+           src="https://img.logoipsum.com/243.svg"
+           alt="Logo"
+           className="h-8 mr-2"
+         />
+         <div className="relative md:block hidden">
+           <input
+             type="text"
+             placeholder="Search..."
+             className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+           />
+           <BiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
+         </div>
+         <button
+           className="md:hidden ml-2"
+           onClick={toggleSearch}
+         >
+           <BiSearch className="text-gray-600 text-2xl" />
+         </button>
+       </div>
+     </div>
+     <button onClick={toggleProfileSidebar}>
+       <BiUserCircle className="text-gray-600 text-2xl" />
+     </button>
+   </nav>
+ );
+};
+
+export default Navbar;
+
+// Sidebar.js
+import React from 'react';
+import { BiHome, BiBook, BiEdit } from 'react-icons/bi';
+
+const Sidebar = ({ isOpen, toggleSidebar }) => {
+ const handleClickOutside = (e) => {
+   if (isOpen && !e.target.closest('.sidebar')) {
+     toggleSidebar();
+   }
+ };
+
+ React.useEffect(() => {
+   document.addEventListener('click', handleClickOutside);
+   return () => {
+     document.removeEventListener('click', handleClickOutside);
+   };
+ }, [isOpen]);
+
+ return (
+   <aside
+     className={`fixed left-0 top-0 bottom-0 bg-white shadow-md transition-all duration-300 ${
+       isOpen ? 'w-64' : 'w-16'
+     }`}
+   >
+     <div className="sidebar flex flex-col h-full overflow-auto">
+       <nav className="mt-16 px-4">
+         <ul>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiHome className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>Home</span>
+             </a>
+           </li>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiBook className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>Read</span>
+             </a>
+           </li>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiEdit className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>Write</span>
+             </a>
+           </li>
+         </ul>
+       </nav>
+     </div>
+   </aside>
+ );
+};
+
+export default Sidebar;
+
+// MainContent.js
+import React from 'react';
+
+const MainContent = () => {
+ return (
+   <main className="flex-1 p-4">
+     <div className="bg-white rounded-lg shadow-md p-6">
+       <h2 className="text-2xl font-semibold mb-4">Welcome</h2>
+       <p>This is the main content area.</p>
+     </div>
+   </main>
+ );
+};
+
+export default MainContent;
+
+// ProfileSidebar.js
+import React from 'react';
+import { BiUserCircle, BiCog, BiLogOut } from 'react-icons/bi';
+
+const ProfileSidebar = ({ isOpen, toggleProfileSidebar }) => {
+ const handleClickOutside = (e) => {
+   if (isOpen && !e.target.closest('.profile-sidebar')) {
+     toggleProfileSidebar();
+   }
+ };
+
+ React.useEffect(() => {
+   document.addEventListener('click', handleClickOutside);
+   return () => {
+     document.removeEventListener('click', handleClickOutside);
+   };
+ }, [isOpen]);
+
+ return (
+   <aside
+     className={`fixed right-0 top-0 bottom-0 bg-white shadow-md transition-all duration-300 ${
+       isOpen ? 'w-64' : 'w-16'
+     }`}
+   >
+     <div className="profile-sidebar flex flex-col h-full overflow-auto">
+       <nav className="mt-16 px-4">
+         <ul>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiUserCircle className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>
+                 Your Profile
+               </span>
+             </a>
+           </li>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiCog className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>
+                 Settings
+               </span>
+             </a>
+           </li>
+           <li className="mb-4">
+             <a
+               href="#"
+               className="flex items-center text-gray-600 hover:text-indigo-600"
+             >
+               <BiLogOut className="text-2xl mr-4" />
+               <span className={`${isOpen ? 'block' : 'hidden'}`}>
+                 Logout
+               </span>
+             </a>
+           </li>
+         </ul>
+       </nav>
+     </div>
+   </aside>
+ );
+};
+
+export default ProfileSidebar;
